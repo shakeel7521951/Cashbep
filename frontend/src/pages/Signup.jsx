@@ -46,12 +46,10 @@ const Signup = () => {
       delete personData.referralCode;
     }
 
-    console.log('persondata', personData);
     try {
       const res = await signupFunc(personData).unwrap();
       toast.success(res?.message);
-      dispatch(setProfile(res?.user));
-      navigate('/');
+      navigate('/verify-user',{state:{user:personData}});
     } catch (error) {
       toast.error(error?.data?.message);
     }

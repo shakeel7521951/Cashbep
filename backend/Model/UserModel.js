@@ -1,29 +1,39 @@
-import mongoose from 'mongoose';
-import validator from 'validator';
-import bcryptjs from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
+import validator from "validator";
+import bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: [3, 'Name must be at least 3 characters'],
+    minlength: [3, "Name must be at least 3 characters"],
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    validator: [validator.isEmail, 'Please enter a valid email address'],
+    validator: [validator.isEmail, "Please enter a valid email address"],
   },
   password: {
     type: String,
     required: true,
-    minlength: [8, 'Password must be at least 8 characters'],
+    minlength: [8, "Password must be at least 8 characters"],
     select: false,
   },
-  eligible:{
-    type:Boolean,
-    default:false
+  status: {
+    type: String,
+    default: "pending",
+  },
+  otp: {
+    type: String,
+  },
+  otpExpires: {
+    type: Date,
+  },
+  eligible: {
+    type: Boolean,
+    default: false,
   },
   cardDetails: {
     cardNumber1: {
@@ -42,7 +52,7 @@ const UserSchema = new mongoose.Schema({
   },
   referredBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     default: null,
   },
   UserLevel: {
@@ -53,7 +63,7 @@ const UserSchema = new mongoose.Schema({
     {
       userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
       },
       points: {
         type: Number,
@@ -102,15 +112,28 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-UserSchema.pre('save', function (next) {
-  if (this.isModified('dailyPoints') && this.dailyPoints.totalPoints === 0) {
+UserSchema.methods.generateOTP = async function () {
+  const otp = Math.floor(1000 + Math.random() * 9999).toString();
+  this.otp = otp;
+  this.otpExpires = Date.now() + 5 * 60 * 1000;
+  await this.save();
+  return otp;
+};
+
+UserSchema.methods.verifyOTP = function (enteredOTP) {
+  if (this.otp !== enteredOTP || Date.now() > this.otpExpires) return false;
+  return true;
+};
+
+UserSchema.pre("save", function (next) {
+  if (this.isModified("dailyPoints") && this.dailyPoints.totalPoints === 0) {
     this.totalPointsEarned = this.totalPointsEarned;
   }
   next();
 });
 
-UserSchema.pre('save', async function () {
-  if (this.isModified('totalPointsEarned') || this.isNew) {
+UserSchema.pre("save", async function () {
+  if (this.isModified("totalPointsEarned") || this.isNew) {
     this.UserLevel = Math.min(
       100,
       Math.floor(this.totalPointsEarned / 5000) + 1
@@ -118,15 +141,15 @@ UserSchema.pre('save', async function () {
   }
 });
 
-UserSchema.pre('save', async function () {
+UserSchema.pre("save", async function () {
   if (!this.referralLink) {
-    const sanitizedUsername = this.name.toLowerCase().replace(/\s+/g, '-');
+    const sanitizedUsername = this.name.toLowerCase().replace(/\s+/g, "-");
     this.referralLink = `${sanitizedUsername}/referral/${this._id}`;
   }
 });
 
-UserSchema.pre('save', function (next) {
-  if (this.isModified('referrals')) {
+UserSchema.pre("save", function (next) {
+  if (this.isModified("referrals")) {
     const referralCount = this.referrals.length;
 
     if (referralCount >= 20) {
@@ -149,7 +172,7 @@ const generateUniqueNumber = async (length, field, model) => {
   while (!isUnique) {
     randomNumber = Array.from({ length }, () =>
       Math.floor(Math.random() * 10)
-    ).join('');
+    ).join("");
 
     const exists = await model.exists({
       [`cardDetails.${field}`]: randomNumber,
@@ -162,20 +185,20 @@ const generateUniqueNumber = async (length, field, model) => {
   return randomNumber;
 };
 
-UserSchema.pre('save', async function () {
+UserSchema.pre("save", async function () {
   if (this.isNew) {
     const User = this.constructor;
 
     this.cardDetails = {
-      cardNumber1: await generateUniqueNumber(3, 'cardNumber1', User),
-      cardNumber2: await generateUniqueNumber(5, 'cardNumber2', User),
-      cardNumber3: await generateUniqueNumber(2, 'cardNumber3', User),
+      cardNumber1: await generateUniqueNumber(3, "cardNumber1", User),
+      cardNumber2: await generateUniqueNumber(5, "cardNumber2", User),
+      cardNumber3: await generateUniqueNumber(2, "cardNumber3", User),
     };
   }
 });
 
-UserSchema.pre('save', async function () {
-  if (this.isModified('password')) {
+UserSchema.pre("save", async function () {
+  if (this.isModified("password")) {
     this.password = await bcryptjs.hash(this.password, 10);
   }
 });
@@ -190,4 +213,4 @@ UserSchema.methods.getJWTToken = function () {
   });
 };
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model("User", UserSchema);

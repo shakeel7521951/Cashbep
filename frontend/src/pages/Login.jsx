@@ -112,6 +112,7 @@ const Login = () => {
               required
             />
           </div>
+          <Link to="/forgot-password" className='flex text-red-600 ml-auto pt-2 hover:underline w-fit'>Forgot Password?</Link>
         </div>
 
         {/* Error Message */}

@@ -15,6 +15,9 @@ import { useDispatch } from 'react-redux';
 import { useGetProfileQuery } from './redux/userApi';
 import { useEffect } from 'react';
 import { setProfile } from './redux/userSlice';
+import VerifyUser from './pages/VerifyUser';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 // Layout component to include the BottomBar and render children
 const Layout = () => {
@@ -72,6 +75,18 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/verify-user',
+    element: <VerifyUser />,
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPassword />,
+  },
+  {
+    path: '/reset-password',
+    element: <ResetPassword />,
   },
 ]);
 

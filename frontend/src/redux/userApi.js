@@ -23,6 +23,13 @@ export const userApi = createApi({
         body: personData,
       }),
     }),
+    verifyUser: builder.mutation({
+      query: ({ otp, email }) => ({
+        url: "/verify-user",
+        method: "POST",
+        body: { otp, email },
+      }),
+    }),
     login: builder.mutation({
       query: (loginData) => ({
         url: '/login',
@@ -41,7 +48,7 @@ export const userApi = createApi({
         url: '/profile',
         method: 'GET',
       }),
-      providesTags: ['profile'], // Query provides the 'Posts' tag
+      providesTags: ['profile'],
     }),
     getPoints: builder.query({
       query: () => ({
@@ -83,6 +90,31 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['profile'],
     }),
+
+    forgotpasswordotp: builder.mutation({
+      query: (email) => ({
+        url: "/forgot-password-otp",
+        method: "POST",
+        body: { email },
+      }),
+    }),
+    
+    verifyOTP: builder.mutation({
+      query: ({email,otp}) => ({
+        url: "/verify-otp",
+        method: "POST",
+        body: { email,otp },
+      }),
+    }),
+
+    resetPassword: builder.mutation({
+      query: ({email,password}) => ({
+        url: "/reset-password",
+        method: "PUT",
+        body: { email,password },
+      }),
+    }),
+
   }),
 });
 
@@ -97,4 +129,8 @@ export const {
   useSendFeedbackMutation,
   useChangeBepCoinMutation,
   useChangeExtraBepCoinMutation,
+  useVerifyUserMutation,
+  useForgotpasswordotpMutation,
+  useVerifyOTPMutation,
+  useResetPasswordMutation,
 } = userApi;
