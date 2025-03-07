@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import coins from '../assets/images/coins.webp';
 import { toast } from 'react-toastify';
 import { FaLock, FaUnlock, FaKey, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useUpdatePasswordMutation } from '../redux/userApi';
@@ -48,29 +49,30 @@ function Settings() {
   };
 
   return (
-    <div>
+    <div style={{ background: `url(${coins})`, backgroundSize: "cover" }}>
+       <div className="w-full min-h-screen bg-[#262a31bf] p-2">
       <section>
-        <p className='text-[60px] font-bold text-center text-blue-950 mb-[20px] mt-3'>
-          <span className='text-red-700'>C</span>ashBep
+        <p className=' text-2xl sm:text-5xl font-bold text-center text-white mb-[1rem] mt-3'>
+          <span className='text-[#b39c2a]'>BMX</span>Adventure
         </p>
-        <div className='container mx-auto px-4 mb-40 setting-style'>
-          <h3 className='uppercase text-center text-2xl mt-40 font-bold'>
+        <div className='container mx-auto px-4 mb-20 sm:mb-40 setting-style'>
+          <h3 className='uppercase text-center text-white text-md sm:text-2xl mt-3 mb-3 sm:mt-10 font-bold'>
             Change Password
           </h3>
           <form onSubmit={handleSubmit} className='lg:w-1/2 lg:mx-auto'>
             <div className='mb-4'>
               <label
                 htmlFor='oldPassword'
-                className=' font-medium text-black mb-2 text-sm flex items-center'
+                className=' font-medium text-white mb-2 text-sm flex items-center'
               >
-                <FaLock className='mr-2 text-blue-700' /> Current Password
+                <FaLock className='mr-2 text-[#b39c2a]' /> Current Password
               </label>
               <div className='relative'>
                 <input
                   type={showoldPassword ? 'text' : 'password'}
                   name='oldPassword'
                   id='oldPassword'
-                  className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                  className='shadow-sm bg-gray-50 border border-[#b39c2a] outline-none text-gray-900 text-sm rounded-lg fo block w-full p-2.5'
                   value={formData.oldPassword}
                   onChange={handleChange}
                   required
@@ -87,16 +89,16 @@ function Settings() {
             <div className='mb-4'>
               <label
                 htmlFor='Password'
-                className=' font-medium text-black mb-2 text-sm flex items-center'
+                className=' font-medium text-white mb-2 text-sm flex items-center'
               >
-                <FaUnlock className='mr-2 text-green-600' /> New Password
+                <FaUnlock className='mr-2 text-[#b39c2a]' /> New Password
               </label>
               <div className='relative'>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name='Password'
                   id='Password'
-                  className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                  className='shadow-sm bg-gray-50 border border-[#b39c2a] outline-none text-gray-900 text-sm rounded-lg fo block w-full p-2.5'
                   value={formData.Password}
                   onChange={handleChange}
                   required
@@ -113,16 +115,16 @@ function Settings() {
             <div className='mb-4'>
               <label
                 htmlFor='ConfirmPassword'
-                className=' font-medium text-black mb-2 text-sm flex items-center'
+                className=' font-medium text-white mb-2 text-sm flex items-center'
               >
-                <FaKey className='mr-2 text-yellow-500' /> Confirm Password
+                <FaKey className='mr-2 text-[#b39c2a]' /> Confirm Password
               </label>
               <div className='relative'>
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   name='ConfirmPassword'
                   id='ConfirmPassword'
-                  className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                  className='shadow-sm bg-gray-50 border border-[#b39c2a] outline-none text-gray-900 text-sm rounded-lg  block w-full p-2.5'
                   value={formData.ConfirmPassword}
                   onChange={handleChange}
                   required
@@ -138,13 +140,18 @@ function Settings() {
             </div>
             <button
               type='submit'
-              className='text-white bg-blue-700 float-right hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-3 py-2 text-center mb-10 flex items-center'
+             
             >
-              {isLoading ? 'Loading...' : 'SAVE'}
+              <a className="relative inline-flex items-center justify-start px-10 text-nowrap py-3 border border-black overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                <span className="w-48 h-48 rounded rotate-[-40deg]  bg-[#b39c2a] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">{isLoading ? 'Loading...' : 'SAVE'}</span>
+                </a>
+              
             </button>
           </form>
         </div>
       </section>
+      </div>
     </div>
   );
 }

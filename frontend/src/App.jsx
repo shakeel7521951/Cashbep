@@ -22,7 +22,7 @@ import ResetPassword from './pages/ResetPassword';
 // Layout component to include the BottomBar and render children
 const Layout = () => {
   return (
-    <div>
+    <div >
       <Outlet /> {/* Renders child routes */}
       <BottomBar /> {/* Persistent bottom bar */}
     </div>
