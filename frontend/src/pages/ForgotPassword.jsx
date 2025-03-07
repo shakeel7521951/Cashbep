@@ -68,7 +68,7 @@ const ForgotPassword = () => {
   return (
     <div className="flex justify-center items-center py-24 bg-gray-100">
       <div className="p-8 shadow-2xl rounded-md bg-white w-[30rem]">
-        <h1 className="text-2xl font-bold mb-6 text-center">Forgot Password</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-[#b39c2a]">Forgot Password</h1>
 
         {!otpSent ? (
           <div className="space-y-4">
@@ -77,11 +77,11 @@ const ForgotPassword = () => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border-2 border-blue-200 p-2 rounded-lg w-full focus:outline-none focus:border-blue-500"
+              className="border-2 border-[#b39c2a] p-2 rounded-lg w-full outline-none"
             />
             <button
               onClick={handleSendOtp}
-              className="bg-blue-500 cursor-pointer text-white p-2 rounded-lg w-full hover:bg-blue-600 focus:outline-none"
+              className="bg-[#b39c2a] cursor-pointer text-white p-2 rounded-lg w-full  focus:outline-none"
             >
               Send OTP
             </button>
@@ -98,14 +98,14 @@ const ForgotPassword = () => {
                   value={digit}
                   onChange={(e) => handleOtpChange(index, e.target.value)}
                   ref={(el) => (otpInputRefs.current[index] = el)}
-                  className="w-12 h-12 border-2 border-blue-200 text-center rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-12 h-12 border-2 border-[#b39c2a] text-center rounded-lg outline-none"
                 />
               ))}
             </div>
             <button
               onClick={handleVerifyOtp}
               disabled={verifyOtpLoading}
-              className="bg-blue-500 cursor-pointer text-white p-2 rounded-lg w-full hover:bg-blue-600 focus:outline-none disabled:bg-blue-300"
+              className="bg-[#b39c2a] cursor-pointer text-white p-2 rounded-lg w-full outline-none"
             >
               {verifyOtpLoading ? "Verifying..." : "Verify OTP"}
             </button>

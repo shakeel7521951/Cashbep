@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
+import coins from '../assets/images/coins.webp';
 import { FaUser, FaCommentDots } from 'react-icons/fa';
 import { useSendFeedbackMutation } from '../redux/userApi';
 import { toast } from 'react-toastify';
@@ -29,32 +30,33 @@ const FeedBack = () => {
   };
 
   return (
-    <div>
+    <div style={{ background: `url(${coins})`, backgroundSize: "cover" }}>
+       <div className="w-full min-h-screen bg-[#262a31bf] p-2">
       <section>
-        <p className='text-[60px] font-bold text-center text-blue-950 mb-[20px] mt-3'>
-          <span className='text-red-700'>C</span>ashBep
+        <p className='text-2xl sm:text-5xl font-bold text-center text-white mb-[1rem] mt-3'>
+          <span className='text-[#b39c2a]'>BMX</span>Adventure
         </p>
-        <div className='container mx-auto px-4 mb-40 setting-style'>
-          <h3 className='uppercase text-center text-2xl mt-40 font-bold'>
+        <div className='container mx-auto px-4 mb-20 sm:mb-30 setting-style'>
+          <h3 className='uppercase text-center text-xl sm:text-2xl mt-2 mb-3 sm:mt-4 text-[#b39c2a] font-bold'>
             Feedback
           </h3>
-          <p className='text-center text-gray-600 mb-6'>
+          <p className='text-center text-white mb-6'>
             Add your feedback to this website. We value your opinions and
             suggestions.
           </p>
-          <form onSubmit={handleSubmit} className='lg:w-1/2 lg:mx-auto'>
+          <form onSubmit={handleSubmit} className='lg:w-1/2 lg:mx-auto bg-white p-8 rounded-md'>
             <div className='mb-4'>
               <label
                 htmlFor='name'
-                className=' font-medium text-black mb-2 text-sm flex items-center'
+                className=' font-medium text-[#b39c2a] mb-2 text-sm flex items-center'
               >
-                <FaUser className='mr-2 text-blue-700' /> Your Name
+                <FaUser className='mr-2 text-[#b39c2a]' /> Your Name
               </label>
               <input
                 type='text'
                 name='name'
                 id='name'
-                className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                className='shadow-sm bg-gray-50 border border-[#b39c2a] text-gray-900 text-sm rounded-lg outline-none block w-full p-2.5'
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -63,15 +65,15 @@ const FeedBack = () => {
             <div className='mb-4'>
               <label
                 htmlFor='content'
-                className=' font-medium text-black mb-2 text-sm flex items-center'
+                className=' font-medium text-[#b39c2a] mb-2 text-sm flex items-center'
               >
-                <FaCommentDots className='mr-2 text-yellow-500' /> Your content
+                <FaCommentDots className='mr-2 text-[#b39c2a]' /> Your content
               </label>
               <textarea
                 name='content'
                 id='content'
                 rows='4'
-                className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                className='shadow-sm bg-gray-50 border border-[#b39c2a] text-gray-900 text-sm rounded-lg outline-none block w-full p-2.5'
                 value={formData.content}
                 onChange={handleChange}
                 required
@@ -79,13 +81,18 @@ const FeedBack = () => {
             </div>
             <button
               type='submit'
-              className='text-white bg-blue-700 float-right hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-3 py-2 text-center mb-10 flex items-center'
+             
             >
-              {isLoading ? 'Submitting...' : 'Submit'}
+              <a className="relative inline-flex items-center justify-start px-6 text-nowrap py-2 border border-black overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                <span className="w-48 h-48 rounded rotate-[-40deg]  bg-[#b39c2a] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">{isLoading ? 'Submitting...' : 'Submit'}</span>
+                </a>
+              
             </button>
           </form>
         </div>
       </section>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import React from 'react';
+import coins from '../assets/images/coins.webp';
+
 import { useSelector } from 'react-redux';
 import {
   useChangeBepCoinMutation,
@@ -52,69 +53,65 @@ function Wallet() {
   };
 
   return (
-    <div>
-      <p className='text-[60px] font-bold text-center text-blue-950 mb-[5rem] mt-3'>
-        <span className='text-red-700'>C</span>ashBep
-      </p>
-      <section>
-        <div className='container mx-auto px-4 mb-10 flex flex-col items-center justify-center gap-4'>
-          <div className='flex gap-4 text-center'>
-            <span className='flex-1'>
-              <h3 className='text-xl font-bold'>BEP COIN</h3>
-              <h2 id='points' className='text-xl font-medium mb-4  bep-coin'>
-                {profile?.dailyPoints?.totalPoints || 0}
-              </h2>
-              <button
-                className='text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-                onClick={handleBepCoins}
-              >
-                Exchange to PKR
-              </button>
-            </span>
-            <span className='flex-1'>
-              <h3 className='text-lg font-bold '>EXTRA BEP </h3>
-              <h2 id='extrapoints' className='text-xl font-bold mb-4 bep-coin'>
-                {refferedPoint || 0}
-              </h2>
-              <button
-                className='text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-                onClick={handleExtraBep}
-              >
-                Exchange to PKR
-              </button>
-            </span>
-          </div>
-          <div>
-            <span className='flex-1 text-center flex flex-col gap-4'>
-              <h3 id='balance' className='text-4xl font-bold'>
-                {profile?.convertedPointsInPKR || 0}
-              </h3>
-              <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
-                Get In Your Bank
-              </button>
-            </span>
-          </div>
+    <div className="min-h-screen md:min-h-[100vh]" style={{ background: `url(${coins})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className="w-full min-h-screen bg-[#262a31bf] p-2">
 
-          {/* <div className='w-full lg:w-3/6 lg:mx-auto relative shadow-md sm:rounded-lg'>
-            <table className='w-full text-sm text-center text-black border border-gray-200 mb-10'>
-              <thead className='text-lg uppercase bg-green-500 head-clr'>
-                <tr>
-                  <th scope='col' className='py-3 px-3'>
-                    Date & Time
-                  </th>
-                  <th scope='col' className='py-3 px-3'>
-                    Amount
-                  </th>
-                  <th scope='col' className='py-3 px-3'>
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div> */}
-        </div>
-      </section>
+        <p className='text-2xl sm:text-5xl font-bold text-center text-white mb-10 sm:mb-10 mt-3'>
+          <span className='text-[#b39c2a]'>BMX</span>Adventure
+        </p>
+        <section>
+          <div className='container mx-auto px-4 mb-10 flex flex-col items-center justify-center gap-4'>
+            <div className='flex gap-4 text-center'>
+              <span className='flex-1'>
+                <h3 className='text-xl sm:text-2xl font-bold text-white'>BEP COIN</h3>
+                <h2 id='points' className='text-xl sm:text-2xl font-bold text-white mb-2'>
+                  {profile?.dailyPoints?.totalPoints || 0}
+                </h2>
+                <button
+
+                  onClick={handleBepCoins}
+                >
+                  <a className="relative inline-flex items-center justify-start px-6 text-nowrap py-3 border border-black overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                    <span className="w-48 h-48 rounded rotate-[-40deg]  bg-[#b39c2a] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                    <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white"> Exchange to PKR</span>
+                  </a>
+                </button>
+              </span>
+              <span className='flex-1'>
+                <h3 className='text-xl sm:text-2xl font-bold text-white '>EXTRA BEP </h3>
+                <h2 id='extrapoints' className='text-xl sm:text-2xl font-bold text-white mb-2 '>
+                  {refferedPoint || 0}
+                </h2>
+                <button className=''
+                  onClick={handleExtraBep}
+                >
+                  <a className="relative inline-flex items-center justify-start px-6 text-nowrap py-3 border border-black overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                    <span className="w-48 h-48 rounded rotate-[-40deg]  bg-[#b39c2a] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                    <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Exchange to PKR</span>
+                  </a>
+
+                </button>
+              </span>
+            </div>
+            <div>
+              <span className='flex-1 text-center flex flex-col gap-4'>
+                <h3 id='balance' className='text-xl sm:text-2xl font-bold text-white'>
+                  {profile?.convertedPointsInPKR || 0}
+                </h3>
+                <button >
+
+                  <a className="relative inline-flex items-center justify-start px-6 text-nowrap py-3 border border-black overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                    <span className="w-48 h-48 rounded rotate-[-40deg]  bg-[#b39c2a] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                    <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Get In Your Bank</span>
+                  </a>
+                </button>
+              </span>
+            </div>
+
+
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
