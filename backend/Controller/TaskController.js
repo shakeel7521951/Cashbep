@@ -21,6 +21,9 @@ export const getAllTask = catchAsyncError(async (req, res, next) => {
     if (!tasks || tasks.length === 0) {
         return next(new Errorhandler("No tasks found", 404));
     }
+    const randomTasks = tasks
+        .sort(() => 0.5 - Math.random()) 
+        .slice(0, 5); 
 
-    res.status(200).json({ success: true, tasks });
+    res.status(200).json({ success: true, tasks: randomTasks });
 });
