@@ -3,45 +3,15 @@ import { useLazyGetPointsQuery } from "../redux/userApi";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../redux/userSlice";
-
-const dailyworkarray = [
-  {
-    id: 1,
-    work: "Visit This Website to get Points",
-    link: "https://www.example.com/profile",
-  },
-  {
-    id: 2,
-    work: "Visit This Website to get Points",
-    link: "https://www.example.com/tutorial",
-  },
-  {
-    id: 3,
-    work: "Visit This Website to get Points",
-    link: "https://www.example.com/referral",
-  },
-  {
-    id: 4,
-    work: "Visit This Website to get Points",
-    link: "https://www.example.com/survey",
-  },
-  {
-    id: 5,
-    work: "Visit This Website to get Points",
-    link: "https://www.example.com/blog",
-  },
-  {
-    id: 6,
-    work: "Visit This Website to get Points",
-    link: "https://www.example.com/features",
-  },
-];
+import { useGetAllTaskQuery } from "../redux/taskApi";
 
 const DailyWork = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
-  const [triggerGetPoints, { data: pointsData, isLoading, isError, error }] =
-    useLazyGetPointsQuery();
+  const { data } = useGetAllTaskQuery();
+  const [triggerGetPoints, { data: pointsData, isError, error }] = useLazyGetPointsQuery();
+
+  const dailyworkarray = Array.isArray(data?.tasks) ? data.tasks : [];
 
   const handleLinkClick = (event, task) => {
     event.preventDefault();
@@ -55,12 +25,11 @@ const DailyWork = () => {
 
   useEffect(() => {
     if (pointsData) {
-      console.log("Fetched Points Data:", pointsData?.user);
       dispatch(setProfile(pointsData?.user));
       toast.success("Claimed reward successfully!");
     }
     if (isError) {
-      toast.warn(error?.data?.message);
+      toast.warn(error?.data?.message || "Something went wrong!");
     }
   }, [pointsData, isError, error, dispatch]);
 
@@ -95,7 +64,6 @@ const DailyWork = () => {
           </button>
         </div>
       )}
-      {isLoading && <p>Loading points...</p>}
     </div>
   );
 };

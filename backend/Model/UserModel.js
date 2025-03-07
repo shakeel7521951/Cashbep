@@ -113,12 +113,13 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods.generateOTP = async function () {
-  const otp = Math.floor(1000 + Math.random() * 9999).toString();
+  const otp = Math.floor(1000 + Math.random() * 9000).toString();
   this.otp = otp;
   this.otpExpires = Date.now() + 5 * 60 * 1000;
   await this.save();
   return otp;
 };
+
 
 UserSchema.methods.verifyOTP = function (enteredOTP) {
   if (this.otp !== enteredOTP || Date.now() > this.otpExpires) return false;

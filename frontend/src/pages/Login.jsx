@@ -12,7 +12,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const [loginFunc] = useLoginMutation();
   // const { profile } = useSelector((state) => state?.user);
-  // console.log('prof', profile);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +38,6 @@ const Login = () => {
 
     try {
       const resp = await loginFunc(data).unwrap();
-      console.log('reso', resp);
       toast.success(resp?.message);
       dispatch(setProfile(resp?.user));
       navigate('/');
