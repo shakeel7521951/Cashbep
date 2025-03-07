@@ -54,27 +54,27 @@ const Login = () => {
         onSubmit={handleSubmit}
         className='w-full max-w-lg mx-auto p-6 rounded-lg shadow-lg'
       >
-        <p className='text-[50px] font-bold text-center text-blue-950 mb-12'>
-          <span className='text-red-700'>C</span>ashBep
+        <p className='text-2xl sm:text-5xl font-bold text-center text-blue-950 mb-12'>
+          <span className=' text-[#b39a2c]'>BMX</span>Adventure
         </p>
 
         {/* Email Field */}
         <div className='mb-4'>
           <label
             htmlFor='email'
-            className='block mb-2 text-sm font-medium text-[#FD2D55]'
+            className='block mb-2 text-sm font-medium text-[#b39a2c]'
           >
             Email
           </label>
           <div className='relative'>
             <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
-              <Mail className='text-[#FD2D55] w-5 h-5' />
+              <Mail className='text-[#b39a2c] w-5 h-5' />
             </div>
             <input
               type='email'
               name='email'
               placeholder='youremail@gmail.com'
-              className='block w-full p-2.5 pl-10 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500'
+              className='block w-full p-2.5 pl-10 text-sm text-[#b39a2c] bg-gray-50 border border-gray-300 rounded-lg outline-none'
               required
             />
           </div>
@@ -84,42 +84,42 @@ const Login = () => {
         <div className='mb-4'>
           <label
             htmlFor='password'
-            className='block mb-2 text-sm font-medium text-[#FD2D55]'
+            className='block mb-2 text-sm font-medium text-[#b39a2c]'
           >
             Password
           </label>
           <div className='relative'>
             <div className='absolute inset-y-0 left-0 flex items-center pl-3'>
-              <Lock className='text-[#FD2D55] w-5 h-5' />
+              <Lock className='text-[#b39a2c] w-5 h-5' />
             </div>
             <div
               className='absolute inset-y-0 right-2 flex items-center cursor-pointer z-50'
               onClick={() => setIsPasswordVisisble(!isPasswordVisible)}
             >
               {isPasswordVisible ? (
-                <EyeOff className='text-[#FD2D55] w-5 h-5' />
+                <EyeOff className='text-[#b39a2c] w-5 h-5' />
               ) : (
-                <Eye className='text-[#FD2D55] w-5 h-5' />
+                <Eye className='text-[#b39a2c] w-5 h-5' />
               )}
             </div>
             <input
               type={isPasswordVisible ? 'text' : 'password'}
               name='password'
               placeholder='********'
-              className='block w-full p-2.5 pl-10 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-[#1a1235]'
+              className='block w-full p-2.5 pl-10 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-[#b39a2c] outline-none'
               required
             />
           </div>
-          <Link to="/forgot-password" className='flex text-red-600 ml-auto pt-2 hover:underline w-fit'>Forgot Password?</Link>
+          <Link to="/forgot-password" className='flex text-[#b39a2c] ml-auto pt-2 hover:underline w-fit'>Forgot Password?</Link>
         </div>
 
         {/* Error Message */}
-        {error && <p className='text-red-500 text-xs mb-4'>{error}</p>}
+        {error && <p className='text-[#b39a2c] text-xs mb-4'>{error}</p>}
 
         {/* Submit Button */}
         <button
           type='submit'
-          className='w-full bg-[#1C085E] hover:bg-[#1a1235] text-white font-medium py-2.5 px-4 rounded-lg focus:ring-4 '
+          className='w-full bg-[#b39a2c] text-white font-medium py-2.5 px-4 rounded-lg focus:ring-4 '
         >
           LOGIN
         </button>
@@ -128,7 +128,7 @@ const Login = () => {
             Don't have an account?{' '}
             <Link
               to={'/signup'}
-              className='text-[#FD2D55] font-medium hover:underline'
+              className='text-[#b39a2c] font-medium hover:underline'
             >
               Signup
             </Link>
