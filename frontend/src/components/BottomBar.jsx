@@ -28,31 +28,34 @@ function BottomBar() {
   };
 
   return (
-    <div>
+    <div className=' '>
       {/* Bottom Navigation */}
-      <div className='fixed bottom-0 left-0 right-0 bg-[#05DC81] border-t border-gray-100'>
-        <div className='max-w-md mx-auto'>
-          <div className='flex justify-between px-12 py-3'>
-            <Link to={'/'} className='flex flex-col items-center'>
-              <FaHome size={24} className='text-[#19145F]' />
+      <div className="fixed bottom-0 left-0 right-0 bg-[#fff] border-t border-gray-100">
+
+        <div className="max-w-md mx-auto px-4">
+          <div className="flex justify-around py-">
+            <Link to={'/'} className="flex flex-col items-center">
+              <FaHome className="text-2xl sm:text-4xl  text-[#b39c2a]" />
+              <span className="text-xs sm:text-sm font-semibold text-black">Home</span>
             </Link>
-            <Link to={'/feedback'} className='flex flex-col items-center'>
-              <MdMarkEmailRead size={24} className='text-[#19145F]' />
+            <Link to={'/feedback'} className="flex flex-col items-center group">
+              <MdMarkEmailRead className="text-2xl sm:text-4xl  text-[#b39c2a]" />
+              <span className="text-xs sm:text-sm font-semibold  md:text-base text-[#09090a] ">Feedback</span>
             </Link>
             {profile ? (
-              <button
-                className='flex flex-col items-center'
-                onClick={handleLogout}
-              >
-                <FaArrowCircleRight size={24} className='text-[#19145F]' />
+              <button className="flex flex-col items-center" onClick={handleLogout}>
+                <FaArrowCircleRight className="text-2xl sm:text-4xl   transition-all duration-200 ease-in text-[#b39c2a]" />
+                <span className="text-xs sm:text-sm md:text-base text-black">Logout</span>
               </button>
             ) : (
-              <Link to={'/login'} className='flex flex-col items-center'>
-                <FaUser size={24} className='text-[#19145F]' />
+              <Link to={'/login'} className="flex flex-col items-center">
+                <FaUser className="text-2xl sm:text-4xl  text-[#b39c2a] transition-all duration-200 ease-in hover:text-[#b39c2a]" />
+                <span className="text-xs sm:text-sm md:text-base font-semibold text-black">Login</span>
               </Link>
             )}
           </div>
         </div>
+
       </div>
     </div>
   );
