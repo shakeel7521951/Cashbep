@@ -32,7 +32,7 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />, // Layout as the root component
+    element: <Layout />,
     children: [
       {
         path: '/',

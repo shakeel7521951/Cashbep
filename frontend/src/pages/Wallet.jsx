@@ -107,8 +107,6 @@ function Wallet() {
                 </button>
               </span>
             </div>
-
-
           </div>
         </section>
       </div>
