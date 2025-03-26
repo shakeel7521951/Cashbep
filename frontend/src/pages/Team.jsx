@@ -92,7 +92,7 @@ function Team() {
                     {referredUserList.map((user, index) => (
                       <tr
                         key={index}
-                        className='border-b border-blue-800 text-black'
+                        className='border-b border-blue-800 text-black bg-white'
                       >
                         <td className='py-3 px-3'>{user?.name || 'N/A'}</td>
                         <td className='py-3 px-3'>{user?.UserLevel || 'N/A'}</td>
