@@ -4,14 +4,6 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${baseUrl}/api/v1`,
-
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState()?.auth?.token;
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
     credentials: 'include',
   }),
   tagTypes: ['profile'],
